@@ -1,26 +1,35 @@
 from typing import List
 
 # Put your solution in the solution()-function
-
 import json
 
 def solution() -> List[str]:
 
-    # File load
-    json_file = open("pokemon_data.json", "r", encoding="UTF-8")
-    pokemonLists = json.load(json_file)
-    json_file.close
+    # condition1
+    def typefilter() -> bool:
+        return d["types"] == "くさ"
 
-    List = []
+    # conditon2
+    def helthpointhigher() -> bool:
+        return d["stats"]["hp"] >= 80
+
+    # conditon3
+    def abilitysum() -> bool:
+       return len(d["abilities"]) >= 3
+
+    # File load
+    f = open('pokemon_data.json', 'r',encoding="utf-8")
+    pokemonLists = json.load(f)
+    #print('pokemonLists:{}'.format(type(pokemonLists)))
+
+    d = pokemonLists
 
     # Extract condiion 1,2,3
-    for pokemon in pokemonLists:
-        if ('くさ' in pokemon["types"]) \
-            and (pokemon["stats"]["hp"] >= 80)\
-            and (len(pokemon["abilities"]) + len(pokemon["hiddenAbilities"]) >= 3):
-            List.append(pokemon["name"])
-    
-    # Sort
-    List.sort()
+    filter(typefilter,d)
+    filter(helthpointhigher,d)
+    filter(abilitysum,d)   
 
-    return List
+    # Sort
+    l_name = [l.get('name') for l in d]
+
+    return l_name
