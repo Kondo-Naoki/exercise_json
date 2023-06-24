@@ -8,14 +8,13 @@ def solution() -> List[str]:
     with open('pokemon_data.json','r',encoding="utf-8") as file:
         pokemon_data = json.load(file)
 
-    # 1,2,3の条件に合うデータを抽出する
-    filtered_pokemon_data = []
+    # 1,2,3の条件に合うポケモンを抽出する
+    filtered_pokemon_name = []
     for item in pokemon_data:
         if 'くさ' in item['types'] and item['stats']['hp'] >= 80 and (len(item['abilities']) + len(item['hiddenAbilities'])) >= 3:
-            filtered_pokemon_data.append(item)
+            filtered_pokemon_name.append(item['name'])
 
-    # フィルタしたデータを'name'カラムを取り出し、昇順で並び変える
-    name_column = [d.get('name') for d in filtered_pokemon_data]
-    name_column.sort()
+    # 抽出したデータを昇順で並び変える
+    filtered_pokemon_name.sort()
 
-    return name_column
+    return filtered_pokemon_name
