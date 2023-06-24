@@ -17,7 +17,9 @@ def solution() -> List[str]:
     # # 1,2,3の条件に合うポケモンを抽出する
     filtered_pokemon_name = []
     for item in pokemon_list:
-        if pokemon_type in item['types'] and item['stats']['hp'] >= min_hp and (len(item['abilities']) + len(item['hiddenAbilities'])) >= min_abilities:
+        if pokemon_type in item['types'] and \
+            item['stats']['hp'] >= min_hp and \
+            (len(item['abilities']) + len(item['hiddenAbilities'])) >= min_abilities:
             filtered_pokemon_name.append(item['name'])
 
     # # 抽出したデータを名前で昇順に並び変える
