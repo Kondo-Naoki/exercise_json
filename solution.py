@@ -4,9 +4,9 @@ from typing import List
 import json
 
 #Search Conditon
-pokemon_type = 'どく'
-min_hp = 100
-min_abilities = 2
+pokemon_type = 'くさ'
+min_hp = 80
+min_abilities = 3
 
 def solution() -> List[str]:
 
@@ -15,12 +15,10 @@ def solution() -> List[str]:
         pokemon_list = json.load(file)
 
     # # 1,2,3の条件に合うポケモンを抽出する
-    filtered_pokemon_name = []
-    for item in pokemon_list:
+    filtered_pokemon_name = [item['name'] for item in pokemon_list \
         if pokemon_type in item['types'] and \
             item['stats']['hp'] >= min_hp and \
-            (len(item['abilities']) + len(item['hiddenAbilities'])) >= min_abilities:
-            filtered_pokemon_name.append(item['name'])
+            (len(item['abilities']) + len(item['hiddenAbilities'])) >= min_abilities]
 
     # # 抽出したデータを名前で昇順に並び変える
     filtered_pokemon_name.sort()
